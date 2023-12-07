@@ -16,7 +16,7 @@ DSX Game Helper is a simple utility that makes managing and launching DSX (DualS
 
 ### Usage
 
-1. Run the `DSXGameHelper.exe` executable that you extracted.
+1. Run the `DSXGameHelperv1.exe` executable that you extracted.
 
 2. Add your games to the list by clicking the "Add Game" button and selecting the game's executable file.
 
