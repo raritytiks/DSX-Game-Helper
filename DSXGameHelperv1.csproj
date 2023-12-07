@@ -8,6 +8,7 @@
     <SignAssembly>True</SignAssembly>
     <PackageIcon>gamecontroller_23912.png</PackageIcon>
     <ApplicationIcon>controller.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>

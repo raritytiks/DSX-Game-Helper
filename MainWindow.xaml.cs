@@ -33,9 +33,6 @@ namespace DSXGameHelperv1
             gamePaths = new ObservableCollection<GameInfo>(appSettings.GamePaths);
             lvGames.ItemsSource = gamePaths;
 
-            // Bind the DSXExecutablePath from settings to the TextBox
-            txtDSXPath.Text = appSettings.DSXExecutablePath;
-
             DataContext = appSettings;
             InitializeTimer();
             UpdateStatus("Ready. No game running.");
@@ -108,11 +105,6 @@ namespace DSXGameHelperv1
         {
             appSettings.GamePaths = gamePaths.ToList();
 
-            // Save the path from the TextBox to the settings
-            appSettings.DSXExecutablePath = txtDSXPath.Text;
-
-            appSettings.DSXVersionIndex = cbDSXVersion.SelectedIndex;
-
 
             //if (int.TryParse(cbCheckInterval.SelectedItem?.ToString(), out int checkIntervalValue))
             //{
@@ -173,27 +165,6 @@ namespace DSXGameHelperv1
             }
         }
 
-        private void btnBrowseDSX_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Executable files (*.exe)|*.exe",
-                InitialDirectory = appSettings.LastUsedDirectory
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                appSettings.LastUsedDirectory = Path.GetDirectoryName(openFileDialog.FileName);
-
-                // Set the selected path to both the TextBox and the appSettings
-                txtDSXPath.Text = openFileDialog.FileName;
-                appSettings.DSXExecutablePath = openFileDialog.FileName;
-
-                SaveSettings();
-                UpdateStatus("DSX Path set: " + openFileDialog.FileName);
-            }
-        }
-
 
         private void CheckRunningGames(object state)
         {
@@ -247,13 +218,35 @@ namespace DSXGameHelperv1
             }
             UpdateStatus("DSX started with game.");
         }
+
         private void EnsureDSXIsNotRunning()
         {
-            if (!string.IsNullOrWhiteSpace(dsxExecutablePath) && IsProcessRunning(Path.GetFileNameWithoutExtension(dsxExecutablePath)))
+            string[] processNamesToKill = { "DSX", "DualSenseX" };
+
+            foreach (string processName in processNamesToKill)
             {
-                var dsxProcess = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(dsxExecutablePath)).FirstOrDefault();
-                dsxProcess?.Kill();
-                UpdateStatus("DSX stopped.");
+                try
+                {
+                    var dsxProcesses = Process.GetProcesses().Where(p => p.ProcessName.Contains(processName) && !p.ProcessName.Contains("DSXGame"));
+
+                    foreach (var dsxProcess in dsxProcesses)
+                    {
+                        try
+                        {
+                            dsxProcess.Kill();
+                            dsxProcess.WaitForExit();
+                            UpdateStatus($"{dsxProcess.ProcessName} (PID: {dsxProcess.Id}) stopped.");
+                        }
+                        catch (Exception ex)
+                        {
+                            UpdateStatus($"Error stopping {dsxProcess.ProcessName}: {ex.Message}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    UpdateStatus($"Error getting processes for {processName}: {ex.Message}");
+                }
             }
         }
 

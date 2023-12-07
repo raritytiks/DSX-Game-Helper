@@ -30,15 +30,6 @@
             <Button x:Name="btnRemoveGame" Content="Remove Selected" Width="120" Margin="5" Click="btnRemoveGame_Click"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <ComboBox x:Name="cbDSXVersion" Width="200" Margin="5" SelectedIndex="{Binding DSXVersionIndex}">
-                <ComboBoxItem Content="DSX v1 (FREE)" />
-                <ComboBoxItem Content="DSX v2/v3 (STEAM)" />
-            </ComboBox>
-            <TextBox x:Name="txtDSXPath" Width="300" Margin="5" Text="{Binding DSXExecutablePath}" />
-            <Button x:Name="btnBrowseDSX" Content="Browse" Width="80" Margin="5" Click="btnBrowseDSX_Click"/>
-        </StackPanel>
-
         <StackPanel Visibility="Hidden" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
             <TextBlock Text="Check Interval (seconds):" VerticalAlignment="Center" Margin="5"/>
             <ComboBox x:Name="cbCheckInterval" Width="100" Margin="5">
