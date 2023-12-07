@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Windows;
+using Hardcodet.Wpf.TaskbarNotification;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace DSXGameHelperv1
 {
@@ -20,6 +23,8 @@ namespace DSXGameHelperv1
         private Settings appSettings;
 
         public string dsxExecutablePath { get; private set; }
+        private TaskbarIcon taskbarIcon;
+
 
         public MainWindow()
         {
@@ -34,6 +39,46 @@ namespace DSXGameHelperv1
             DataContext = appSettings;
             InitializeTimer();
             UpdateStatus("Ready. No game running.");
+
+
+            taskbarIcon = new TaskbarIcon();
+            taskbarIcon.IconSource = new BitmapImage(new Uri("pack://application:,,,/controller.ico")); // Replace with your own icon path
+            taskbarIcon.ToolTipText = "DSX Game Helper";
+            taskbarIcon.TrayMouseDoubleClick += TaskbarIcon_DoubleClick;
+
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem openMenuItem = new MenuItem() { Header = "Open" };
+            openMenuItem.Click += (sender, e) => OpenMainWindow(sender);
+            MenuItem exitMenuItem = new MenuItem() { Header = "Exit" };
+            exitMenuItem.Click += (sender, e) => Close();
+            contextMenu.Items.Add(openMenuItem);
+            contextMenu.Items.Add(exitMenuItem);
+
+            taskbarIcon.ContextMenu = contextMenu;
+
+        }
+
+        private void TaskbarIcon_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            OpenMainWindow(sender);
+        }
+
+        private void OpenMainWindow(object sender)
+        {
+            Show();
+            WindowState = WindowState.Normal;
+            Activate();
+        }
+
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            base.OnStateChanged(e);
+
+            if (WindowState == WindowState.Minimized)
+            {
+                Hide(); // Hide the main window
+            }
         }
 
 

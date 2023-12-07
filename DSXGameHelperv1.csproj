@@ -5,6 +5,24 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <SignAssembly>True</SignAssembly>
+    <PackageIcon>gamecontroller_23912.png</PackageIcon>
+    <ApplicationIcon>controller.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="controller.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="F:\Downloads\gamecontroller_23912.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+  </ItemGroup>
 
 </Project>
