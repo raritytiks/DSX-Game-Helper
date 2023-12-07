@@ -1,0 +1,60 @@
+﻿<Window x:Class="DSXGameHelperv1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DSXGameHelperv1"
+        mc:Ignorable="d"
+        Title="DSX Game Helper v1.0.0a - @raritytiks" Height="650" Width="800">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="lvGames" Grid.Row="0" Margin="0,0,0,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Game Name" Width="120" DisplayMemberBinding="{Binding GameName}" />
+                    <GridViewColumn Header="Game Executable Path" DisplayMemberBinding="{Binding GamePath}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Button x:Name="btnAddGame" Content="Add Game" Width="100" Margin="5" Click="btnAddGame_Click"/>
+            <Button x:Name="btnRemoveGame" Content="Remove Selected" Width="120" Margin="5" Click="btnRemoveGame_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <ComboBox x:Name="cbDSXVersion" Width="200" Margin="5" SelectedIndex="{Binding DSXVersionIndex}">
+                <ComboBoxItem Content="DSX v1 (FREE)" />
+                <ComboBoxItem Content="DSX v2/v3 (STEAM)" />
+            </ComboBox>
+            <TextBox x:Name="txtDSXPath" Width="300" Margin="5" Text="{Binding DSXExecutablePath}" />
+            <Button x:Name="btnBrowseDSX" Content="Browse" Width="80" Margin="5" Click="btnBrowseDSX_Click"/>
+        </StackPanel>
+
+        <StackPanel Visibility="Hidden" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <TextBlock Text="Check Interval (seconds):" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox x:Name="cbCheckInterval" Width="100" Margin="5">
+                <ComboBoxItem IsSelected="True" Content="1" />
+                <ComboBoxItem Content="2" />
+                <ComboBoxItem Content="4" />
+                <ComboBoxItem Content="8" />
+                <ComboBoxItem Content="10" />
+            </ComboBox>
+        </StackPanel>
+
+        <StatusBar Grid.Row="4">
+            <StatusBarItem>
+                <TextBlock x:Name="txtStatus" Text="Ready" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
