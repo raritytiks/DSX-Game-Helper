@@ -1,0 +1,63 @@
+﻿# Default .NET ignores
+bin/
+obj/
+[Bb]uild[Ll]og.*
+*.[Oo]bj
+*.[Bb]in
+*.[Ss]uo
+*.[Uu]ser
+*.[Rr]eharper
+*.[Rr]esharper.user
+*.userprefs
+*.[Cc]ache
+*.[Cc]sproj.user
+*.[Tt]mp
+*.[Tt]mpProj
+*.[Ll]og
+*.[Vv]spscc
+*.tlog
+*.nuget/
+packages/
+*.nupkg
+*.pfx
+*.publishsettings
+node_modules/
+bower_components/
+
+# Visual Studio and Rider
+*.vs/
+.vs/2022/
+.idea/
+
+# User-specific files
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio Code
+.history/
+
+# MAUI-specific files
+*.db-shm
+*.db-wal
+
+# Exclude local settings files
+*.local.settings.json
+
+# Exclude temporary files and folders
+**/[Tt]est[Rr]esult*
+**/[Ll]og/
+**/[Tt]emp/
+**/[Bb]ackup*/
+
+# Include Docker-related files
+!.dockerignore
+
+# Auto-generated files
+mono_crash.*
