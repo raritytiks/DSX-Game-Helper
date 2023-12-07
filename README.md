@@ -4,7 +4,7 @@
 
 DSX Game Helper is a simple utility that makes managing and launching [DSX](https://store.steampowered.com/app/1812620/DSX/) for your specific games easier. With this tool, you can keep track of your games, select the version of DSX you're using, and specify the location of the DSX executable. DSX Game Helper will periodically check your running processes to detect when your games are running and automatically launch or kill DSX accordingly.
 
-![image](https://github.com/raritytiks/DSX-Game-Helper/assets/15831108/656a8573-7984-420d-b338-efab5d2ff2d3)
+![image](https://github.com/raritytiks/DSX-Game-Helper/assets/15831108/65c353e1-60a6-4525-908c-39e91060f3c3)
 
 
 ## Getting Started
