@@ -38,11 +38,11 @@ DSX Game Helper is a simple utility that makes managing and launching DSX (DualS
 
 ### Updates
 
-- DSX Game Helper may receive updates in the future. Check the [Releases](https://github.com/your-username/dsx-game-helper/releases) page for the latest versions.
+- DSX Game Helper may receive updates in the future. Check the [Releases](https://github.com/raritytiks/dsx-game-helper/releases) page for the latest versions.
 
 ### Issues and Feedback
 
-- If you encounter any issues or have feedback, please [open an issue](https://github.com/your-username/dsx-game-helper/issues) on the GitHub repository.
+- If you encounter any issues or have feedback, please [open an issue](https://github.com/raritytiks/dsx-game-helper/issues) on the GitHub repository.
 
 ---
 
