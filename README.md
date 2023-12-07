@@ -22,28 +22,11 @@ DSX Game Helper is a simple utility that makes managing and launching [DSX](http
 ### Usage
 
 1. Run the `DSXGameHelperv1.exe` executable that you extracted.
-
 2. Add your games to the list by clicking the "Add Game" button and selecting the game's executable file.
-
-3. Choose the version of DSX you are using (DSX Free or DSX Steam) using the dropdown menu.
-
-4. Click the "Browse" button to select the location of the DSX executable file on your system.
-
-5. DSX Game Helper will periodically check your running processes for the added games.
-
-6. If DSX detects a game running and you have selected DSX Free, it will automatically launch the DSX executable.
-
-7. If you have selected DSX Steam, it will launch DSX via Steam when it detects a game running.
-
-8. All your configurations and settings will be saved and loaded automatically on the next launch. Configuration and settings files will be created in the same folder as the `DSXGameHelper.exe` executable.
-
-### Configuration
-
-- The interval is 1 second.
-
-### Updates
-
-- DSX Game Helper may receive updates in the future. Check the [Releases](https://github.com/raritytiks/dsx-game-helper/releases) page for the latest versions.
+3. DSX Game Helper will periodically check if one of your games is running.
+4. If it detects a game running, it will automatically launch the DSX on Steam.
+5. All your configurations and settings will be saved and loaded automatically on the next launch.\
+   Configuration and settings files will be created in the same folder as the `DSXGameHelperv1.exe` executable.
 
 ### Issues and Feedback
 
