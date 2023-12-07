@@ -6,8 +6,8 @@ DSX Game Helper is a simple utility that makes managing and launching DSX (DualS
 
 ### Prerequisites
 
-- Windows operating system (This tool is designed for Windows users).
-- .NET Framework (for .NET Framework version) or .NET Core (for .NET Core/.NET 5/.NET 6 version).
+- Windows 10/11
+- [.NET 7 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-7.0.14-windows-x64-installer)
 
 ### Installation
 
