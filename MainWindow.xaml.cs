@@ -28,12 +28,14 @@ namespace DSXGameHelperv1
             gamePaths = new ObservableCollection<GameInfo>(appSettings.GamePaths);
             lvGames.ItemsSource = gamePaths;
 
-            // Set DataContext for data binding
-            DataContext = appSettings;
+            // Bind the DSXExecutablePath from settings to the TextBox
+            txtDSXPath.Text = appSettings.DSXExecutablePath;
 
+            DataContext = appSettings;
             InitializeTimer();
             UpdateStatus("Ready. No game running.");
         }
+
 
         private void InitializeTimer()
         {
@@ -61,20 +63,21 @@ namespace DSXGameHelperv1
         {
             appSettings.GamePaths = gamePaths.ToList();
 
-            // Update the DSXExecutablePath property in appSettings
-            appSettings.DSXExecutablePath = dsxExecutablePath;
+            // Save the path from the TextBox to the settings
+            appSettings.DSXExecutablePath = txtDSXPath.Text;
 
             appSettings.DSXVersionIndex = cbDSXVersion.SelectedIndex;
 
-            if (int.TryParse(cbCheckInterval.SelectedItem?.ToString(), out int checkIntervalValue))
-            {
-                appSettings.CheckInterval = checkIntervalValue;
-            }
-            else
-            {
-                // Handle the case where parsing fails, e.g., display an error message.
-                UpdateStatus("Invalid check interval selected.");
-            }
+
+            //if (int.TryParse(cbCheckInterval.SelectedItem?.ToString(), out int checkIntervalValue))
+            //{
+            //    appSettings.CheckInterval = checkIntervalValue;
+            //}
+            //else
+            //{
+            //    // Handle the case where parsing fails, e.g., display an error message.
+            //    UpdateStatus("Invalid check interval selected.");
+            //}
 
             string settingsJson = JsonSerializer.Serialize(appSettings);
             File.WriteAllText(SettingsFilePath, settingsJson);
@@ -93,11 +96,12 @@ namespace DSXGameHelperv1
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                InitialDirectory = appSettings.LastUsedDirectory
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
+                appSettings.LastUsedDirectory = Path.GetDirectoryName(openFileDialog.FileName);
                 var gameInfo = new GameInfo
                 {
                     GamePath = openFileDialog.FileName,
@@ -129,13 +133,17 @@ namespace DSXGameHelperv1
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Executable files (*.exe)|*.exe",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)
+                InitialDirectory = appSettings.LastUsedDirectory
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
+                appSettings.LastUsedDirectory = Path.GetDirectoryName(openFileDialog.FileName);
+
+                // Set the selected path to both the TextBox and the appSettings
                 txtDSXPath.Text = openFileDialog.FileName;
                 appSettings.DSXExecutablePath = openFileDialog.FileName;
+
                 SaveSettings();
                 UpdateStatus("DSX Path set: " + openFileDialog.FileName);
             }
@@ -260,6 +268,7 @@ namespace DSXGameHelperv1
             CheckInterval = 1;  // Default to 1 second
 
         }
+        public string LastUsedDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
         public List<GameInfo> GamePaths { get; set; } = new List<GameInfo>();
         public string DSXExecutablePath { get; set; }
         public int DSXVersionIndex { get; set; }
